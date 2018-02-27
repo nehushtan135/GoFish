@@ -1,19 +1,17 @@
 package com.EVDeV;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Game {
+    public Player player1;
+    public Player player2;
     public Dealer dealer;
-    public ArrayList<Player> players;
 
-    public Game(){}
-
-    public Game(int numPlayers){
+    public Game(){
         dealer = new Dealer();
-        players = new ArrayList<>();
-        for(int i = 0; i<numPlayers; i++){
-            Player a = new Player();
-            players.add(a);
-        }
+        player1 = new Player();
+        player2 = new Player();
     }
+
 }

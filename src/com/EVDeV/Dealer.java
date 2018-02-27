@@ -9,16 +9,12 @@ public class Dealer extends Game {
         theDeck = new Deck();
     }
 
-    public void Deal(int numPlayers) {
+    public void Deal() {
         for(int i = 0; i< 7; i++){
-            for(int j = 0; j< numPlayers; j++) {
-                
-
-                //super.players
+            super.player1.addCard(theDeck.getTop());
+            super.player2.addCard(theDeck.getTop());
+            System.out.println("hey");
             }
         }
-
-    }
-
 }
 
