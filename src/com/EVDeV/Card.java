@@ -28,10 +28,7 @@ public class Card {
         Suit s = this.s;
         return s;
     }
-
-    public Card equals(Card card){
-        this.s = card.s;
-        this.v = card.v;
-        return this;
+    public void showCard(){
+        System.out.print(this.v + " of " + this.s +"\n");
     }
 }

@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Stack;
 
 public class Deck extends Stack{
-    public Stack<Card> deck;
+    public  Stack<Card> deck;
 
     public Deck(){
         deck = new Stack<>();
