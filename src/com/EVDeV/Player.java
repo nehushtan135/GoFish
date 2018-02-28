@@ -2,6 +2,7 @@ package com.EVDeV;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Player {
@@ -26,26 +27,34 @@ public class Player {
     public void displaySets(){
         System.out.println("You have sets of: ");
         for(Map.Entry<Card.Value,Integer> entry : this.sets.entrySet()) {
-            System.out.println(entry.getKey() + "'s,");
+            System.out.println(entry.getKey() + "s");
             }
     }
 
     public void checkForSets() {
-        int matches = 0;
+        HashMap<Card.Value, Integer>currentCards = new HashMap<>();
+        List<Card> toRemove = new ArrayList<>();
         for (Card card: hand) {
-            matches = 0;
-            for(Card card1: hand){
-                if(card1.v == card.v){
-                    matches++;
-                }
-                if(matches == 4){
-                    sets.put(card.v,1);
-                    for(Card c : hand){
-                        if(c.v == card.v){
-                            hand.remove(c);
-                        }
+            toRemove.add(card);
+            if (currentCards.containsKey(card.v)) {
+                int current = currentCards.get(card.v);
+                int toAdd = current + 1;
+                currentCards.replace(card.v, current, toAdd++);
+            } else {
+                currentCards.put(card.v, 1);
+            }
+
+        }
+        for (Map.Entry<Card.Value,Integer> entry: currentCards.entrySet())
+        {
+            if(entry.getValue() == 4){
+                sets.put(entry.getKey(),1);
+                for(Card card : toRemove){
+                    if(card.v == entry.getKey()){
+                        hand.remove(card);
                     }
                 }
+
             }
         }
     }
