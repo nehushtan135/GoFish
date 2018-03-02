@@ -31,4 +31,9 @@ public class Card {
     public void showCard(){
         System.out.print(this.v + " of " + this.s +"\n");
     }
+    public void showValue(){
+        System.out.print(this.v + "\n");
+    }
+
+
 }

@@ -20,22 +20,13 @@ public class Game {
     }
     public void play(){
         //happens once at beginning of game
-      //  this.dealer.Deal();
-
+        this.dealer.Deal();
         //happens at the beginning of each turn
-        Card test = new Card(Card.Value.ACE, Card.Suit.HEART);
-        Card test1 = new Card(Card.Value.ACE, Card.Suit.CLUB);
-        Card test2 = new Card(Card.Value.ACE, Card.Suit.SPADE);
-        Card test3 = new Card(Card.Value.ACE, Card.Suit.DIAMOND);
-        this.dealer.player1.addCard(test);
-        this.dealer.player1.addCard(test1);
-        this.dealer.player1.addCard(test2);
-        this.dealer.player1.addCard(test3);
+
         this.dealer.player1.checkForSets();
         this.dealer.player1.showHand();
-
         this.dealer.player1.displaySets();
-        //to test checkForSets()
+        this.dealer.player1.playTurn();
 
 
 

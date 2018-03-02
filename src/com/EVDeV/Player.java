@@ -1,9 +1,8 @@
 package com.EVDeV;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.*;
 
 public class Player {
     public ArrayList<Card> hand;
@@ -26,9 +25,14 @@ public class Player {
 
     public void displaySets(){
         System.out.println("You have sets of: ");
-        for(Map.Entry<Card.Value,Integer> entry : this.sets.entrySet()) {
-            System.out.println(entry.getKey() + "s");
+        if(sets.isEmpty()){
+            System.out.print("None\n");
+        }
+        else {
+            for (Map.Entry<Card.Value, Integer> entry : this.sets.entrySet()) {
+                System.out.println(entry.getKey() + "s");
             }
+        }
     }
 
     public void checkForSets() {
@@ -57,5 +61,73 @@ public class Player {
 
             }
         }
+    }
+
+    public void playTurn() {
+        Scanner scanner = new Scanner(System.in);
+        String request;
+        System.out.println("What Card do you want to ask for?");
+        HashSet<Card.Value> options = new HashSet<>();
+
+        //get options
+        for (Card card: hand) {
+            options.add(card.v);
+
+        }
+        //display options
+        for(Card.Value c : options){
+            System.out.println(c);
+        }
+        request = scanner.next();
+        Card.Value requestValue =  this.parseValue(request);
+    }
+
+    public Card.Value parseValue(String input){
+        Card.Value returnValue;
+        switch (input){
+            case "ace":
+                returnValue = Card.Value.ACE;
+                break;
+            case "two":
+                returnValue = Card.Value.TWO;
+                break;
+            case "three":
+                returnValue = Card.Value.THREE;
+                break;
+            case "four":
+                returnValue = Card.Value.FOUR;
+                break;
+            case "five":
+                returnValue = Card.Value.FIVE;
+                break;
+            case "six":
+                returnValue = Card.Value.SIX;
+                break;
+            case "seven":
+                returnValue = Card.Value.SEVEN;
+                break;
+            case "eight":
+                returnValue = Card.Value.EIGHT;
+                break;
+            case "nine":
+                returnValue = Card.Value.NINE;
+                break;
+            case "ten":
+                returnValue = Card.Value.TEN;
+                break;
+            case "jack":
+                returnValue = Card.Value.JACK;
+                break;
+            case "queen":
+                returnValue = Card.Value.QUEEN;
+                break;
+            case "king":
+                returnValue = Card.Value.KING;
+                break;
+            default:
+                returnValue = null;
+                break;
+        }
+        return returnValue;
     }
 }
