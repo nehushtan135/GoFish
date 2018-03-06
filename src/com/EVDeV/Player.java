@@ -4,9 +4,11 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.*;
 
-public class Player {
+public class Player{
     public ArrayList<Card> hand;
     public HashMap<Card.Value,Integer> sets;
+    HashSet<Card.Value> options = new HashSet<>();
+
 
     public Player(){
         hand = new ArrayList<>();
@@ -63,16 +65,14 @@ public class Player {
         }
     }
 
-    public void playTurn() {
+    public Card.Value playTurn() {
         Scanner scanner = new Scanner(System.in);
         String request;
         System.out.println("What Card do you want to ask for?");
-        HashSet<Card.Value> options = new HashSet<>();
-
         //get options
+        options.clear();
         for (Card card: hand) {
             options.add(card.v);
-
         }
         //display options
         for(Card.Value c : options){
@@ -80,6 +80,18 @@ public class Player {
         }
         request = scanner.next();
         Card.Value requestValue =  this.parseValue(request);
+        while(requestValue == null) {
+            if (requestValue == null || (!options.contains(requestValue))) {
+                System.out.println("Invalid entry please try again!");
+            }
+            if(!options.contains(requestValue)){
+                System.out.println("You don't have that card to request! Try again!");
+            }
+            else {
+                return requestValue;
+            }
+        }
+        return requestValue;
     }
 
     public Card.Value parseValue(String input){
@@ -129,5 +141,39 @@ public class Player {
                 break;
         }
         return returnValue;
+    }
+
+    public Boolean checkHand(Card.Value req) {
+        for(Card card : hand){
+            if (card.v == req){
+                 return true;
+            }
+        }
+        return false;
+    }
+
+    public Set<Card.Suit> removeRequested(Card.Value req) {
+        Set<Card.Suit>toAdd = new HashSet<>();
+        List<Card> toRemove = new ArrayList<>();
+        for (Card card: hand) {
+            toRemove.add(card);
+        }
+        for(Card card: toRemove){
+            if(card.v == req){
+                hand.remove(card);
+                toAdd.add(card.s);
+                System.out.print("stop");
+            }
+        }
+        return toAdd;
+    }
+
+    public void addReqCard(Card.Value req, Set<Card.Suit> toAdd) {
+        for(Card.Suit cs : toAdd){
+            Card c = new Card(req,cs);
+            hand.add(c);
+            System.out.print("stop");
+
+        }
     }
 }
