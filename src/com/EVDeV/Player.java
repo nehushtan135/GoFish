@@ -176,4 +176,8 @@ public class Player{
 
         }
     }
+
+    public void goFish(Card.Value check) {
+
+    }
 }
